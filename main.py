@@ -61,7 +61,9 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
     comment_author = relationship("User", back_populates="comments")
     text = db.Column(db.Text, nullable=False)
-db.create_all()
+
+
+# db.create_all()
 
 
 def admin_only(f):
@@ -186,8 +188,6 @@ def add_new_post():
     return render_template("make-post.html", form=form, current_user=current_user)
 
 
-
-
 @app.route("/edit-post/<int:post_id>", methods=["GET", "POST"])
 @admin_only
 def edit_post(post_id):
@@ -220,4 +220,4 @@ def delete_post(post_id):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
